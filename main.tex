@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DocumentMetadata{
+	pdfstandard=a-2b,
+	pdfversion=1.7,% 2.0 is possible as well, but PDF/A-2b requires < 2.0
+	lang=en,
+}
+
+\PassOptionsToClass{thesis={type=bachelor}}{tudapub}
+\documentclass[
+	main=english,% Main language as global option
+	accentcolor=9c,% Choose accent color: For a list of available colors see the full tudapub documentation
+	ruledheaders=section,% Section levels above this one will follow the ruled layout
+	class=report,% Choose the base document class. Will choose the matching KOMA-Script class
+	fontsize=11pt,% Basic font size. CI default setting of 9pt is too small for theses
+	parskip=half-,% Use a parskip instead of indent, see KOMA-Script documentation
+	custommargins=false,% Calculate margins using typearea
+	marginpar=false,% Disable marginpar
+%	BCOR=5mm,% Binding correction
+%	accept-missing-logoes=true,% No error in case logo files are not available
+%	logofile=example-image,% In case logo should be replaced
+]{tudapub}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Suppress Warnings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{silence}
+\WarningFilter{fvextra}{Command \@parboxrestore has changed}
+\WarningFilter{todonotes}{The length marginparwidth is less than 2cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Code Listings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fvextra}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Language and Typography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+    main=USenglish, % Main language
+    ngerman % Secondary (for affidavit etc.)
+]{babel}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[autostyle]{csquotes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+    style=numeric-comp, % e.g., [1-4]
+    sorting=nyt, % name-year-title
+    language=english
+]{biblatex}
+\addbibresource{bibliography.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{siunitx}
+\usepackage{bm}
+\usepackage{bbm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figures, TikZ, and Visuals
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz, pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{
+    3d, angles, animations, arrows.meta, automata, backgrounds, 
+    calc, circuits.ee.IEC, circuits.logic.US, datavisualization, 
+    decorations.markings, fit, matrix, patterns, positioning, 
+    quotes, shapes, spy, trees, turtle, svg.path
+}
+\usepackage{svg} % Embed SVG graphics
+\usepackage{subcaption} % Subfigures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tabularx} % Tables with flexible columns to achieve fixed width
+\usepackage{longtable} % Tables across multiple pages
+\usepackage{xltabular} % Tables with fixed width spanning multiple pages
+\usepackage{booktabs} % Improved layout for horizontal rules in tables
+\usepackage{makecell} % Multi-line cells
+\usepackage{tcolorbox} % For boxed tables or environments
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% References and Document Structure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{standalone}
+\usepackage{import}
+\usepackage{hyperref}
+\usepackage[capitalize]{cleveref}
+\usepackage{etoolbox}
+\usepackage{xr} % Cross-referencing between documents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Utility and Layout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{adjustbox}
+\usepackage{placeins} % \FloatBarrier
+\usepackage{fontawesome5}
+\usepackage{todonotes}
+\setuptodonotes{inline, color=TUDa-8a!80}
+\usepackage{subfiles} % For modular documents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dummy Text
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lipsum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TU-Pkgs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tudafonts}
+\usepackage{tudacolors}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Personalization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Title}
+%\subtitle{\LaTeX{} im Corporate Design der TU Darmstadt}
+\author{Author}
+\reviewer*[Examiner, Supervisor]{Examiner \and Supervisor}
+
+\department{inf}
+\institute{Institute}
+%\group{Group}
+
+\submissiondate{\today}
+\examdate{\today}
+
+%\tuprints{urn=XXXXX,printid=XXXX,year=2022,license=cc-by-4.0}% License information for TUprints
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle{}
+
+\subfile{chapters/abstract}
+\subfile{chapters/writing-tools}
+\subfile{chapters/affidavit}
+
+\tableofcontents{}
+
+\subfile{chapters/introduction}
+\subfile{chapters/preliminaries}
+\subfile{chapters/related-work}
+\subfile{chapters/methods}
+\subfile{chapters/results}
+\subfile{chapters/discussion}
+\subfile{chapters/conclusion}
+
+\subfile{chapters/appendix}
+
+\clearpage{}\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+
+\clearpage{}\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+\clearpage{}\phantomsection
+\addcontentsline{toc}{chapter}{List of Code Blocks}
+%\listofcodeblocks
+
+\clearpage{}
+\printbibliography{}
+
+\end{document}
